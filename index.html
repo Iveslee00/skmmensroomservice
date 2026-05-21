@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SKM MEN'S Service Room 預約</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="booking-shell">
+      <section class="form-panel" aria-label="造型服務預約表單">
+        <div class="form-heading">
+          <div class="brand-mark">SKM MEN'S</div>
+          <p class="eyebrow">A9 Service Room</p>
+        </div>
+
+        <ol class="stepper" aria-label="填寫進度">
+          <li class="is-active" data-step-indicator="1">介紹</li>
+          <li data-step-indicator="2">基本資料</li>
+          <li data-step-indicator="3">偏好時段</li>
+          <li data-step-indicator="4">送出確認</li>
+        </ol>
+
+        <form id="bookingForm" novalidate>
+          <fieldset class="form-step intro-step is-active" data-step="1">
+            <div class="intro-layout">
+              <div class="editorial-visual" aria-hidden="true">
+                <img src="assets/skm-mens-opening.png" alt="" />
+              </div>
+              <div class="intro-copy">
+                <p class="eyebrow">台北信義新天地 A9 3F</p>
+                <h1>一對一造型搭配服務</h1>
+                <p>
+                  由 SKM MEN'S 顧問依照穿搭場合、輪廓偏好、喜愛品牌與衣櫥需求，安排專屬造型時段。留下資訊後，專人將以電話確認實際預約。
+                </p>
+                <dl class="service-facts">
+                  <div>
+                    <dt>服務時間</dt>
+                    <dd>11:00 - 21:00</dd>
+                  </div>
+                  <div>
+                    <dt>預約專線</dt>
+                    <dd>(02) 2757-2639</dd>
+                  </div>
+                  <div>
+                    <dt>確認方式</dt>
+                    <dd>專人電話回覆</dd>
+                  </div>
+                </dl>
+                <button class="intro-cta" type="button" id="introStartBtn">開始預約</button>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-step" data-step="2">
+            <h2 class="screen-title">基本資料</h2>
+            <div class="field-grid">
+              <label>
+                <span>姓名 *</span>
+                <input name="name" autocomplete="name" required placeholder="請輸入姓名" />
+              </label>
+              <label>
+                <span>手機 *</span>
+                <input name="phone" inputmode="tel" autocomplete="tel" required placeholder="0912 345 678" />
+              </label>
+              <label>
+                <span>電子郵件 *</span>
+                <input name="email" type="email" autocomplete="email" required placeholder="name@example.com" />
+              </label>
+              <label>
+                <span>介紹人</span>
+                <input name="referrer" placeholder="沒有請填無" />
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-step" data-step="3">
+            <h2 class="screen-title">偏好與時段</h2>
+            <div class="field-grid">
+              <label>
+                <span>平時喜歡的穿衣風格 *</span>
+                <input name="style" required placeholder="例如：都會簡約、商務休閒、日系層次" />
+              </label>
+              <label>
+                <span>喜歡的品牌 *</span>
+                <input name="brands" required placeholder="例如：Issey Miyake, Homme Plisse, Kolor" />
+              </label>
+              <label>
+                <span>希望預約日期 *</span>
+                <input name="date" type="date" required />
+              </label>
+              <label>
+                <span>希望預約時段 *</span>
+                <select name="time" id="timeOptions" required>
+                  <option value="">請選擇時段</option>
+                </select>
+              </label>
+              <div class="radio-group wide" role="radiogroup" aria-labelledby="tailorLabel">
+                <span id="tailorLabel">是否加選色彩鑑定服務</span>
+                <label class="choice"><input type="radio" name="colorConsult" value="是" /> 是</label>
+                <label class="choice"><input type="radio" name="colorConsult" value="否" checked /> 否</label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-step" data-step="4">
+            <h2 class="screen-title">確認送出</h2>
+            <div class="review-card" id="reviewCard" aria-live="polite"></div>
+            <label class="consent">
+              <input name="consent" type="checkbox" required />
+              <span>我同意 SKM MEN'S 為預約聯繫與服務安排使用以上資料。*</span>
+            </label>
+          </fieldset>
+
+          <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+
+          <div class="form-actions">
+            <button class="secondary-button" type="button" id="prevBtn">返回</button>
+            <button class="primary-button" type="button" id="nextBtn">下一步</button>
+            <button class="primary-button" type="submit" id="submitBtn">送出預約</button>
+          </div>
+        </form>
+
+        <aside class="admin-tools" aria-label="資料彙整工具">
+          <div>
+            <strong>資料彙整</strong>
+            <span id="recordCount">目前 0 筆測試紀錄</span>
+          </div>
+          <button type="button" id="downloadCsv">匯出 CSV</button>
+        </aside>
+      </section>
+    </main>
+
+    <template id="successTemplate">
+      <div class="success-card">
+        <span class="success-mark" aria-hidden="true"></span>
+        <p class="success-kicker">Reservation received</p>
+        <strong>預約資料已送出</strong>
+        <p class="success-body">我們會以電話確認實際服務時段。若日期或時間需調整，專人會再與你聯繫。</p>
+      </div>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
