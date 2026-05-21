@@ -25,6 +25,9 @@ const prevBtn = document.querySelector("#prevBtn");
 const nextBtn = document.querySelector("#nextBtn");
 const submitBtn = document.querySelector("#submitBtn");
 const introStartBtn = document.querySelector("#introStartBtn");
+const brandSelect = document.querySelector("#brandSelect");
+const brandOtherField = document.querySelector("#brandOtherField");
+const brandOtherInput = document.querySelector("#brandOtherInput");
 const message = document.querySelector("#formMessage");
 const reviewCard = document.querySelector("#reviewCard");
 const recordCount = document.querySelector("#recordCount");
@@ -34,6 +37,7 @@ let currentStep = 0;
 function init() {
   renderTimeSlots();
   setMinBookingDate();
+  updateBrandOtherField();
   updateStep();
   updateRecordCount();
 }
@@ -82,6 +86,12 @@ function validateCurrentStep() {
     if (!valid) isValid = false;
   });
 
+  if (currentStep === 2 && brandSelect.value === "其他" && !brandOtherInput.value.trim()) {
+    brandOtherInput.classList.add("is-invalid");
+    brandOtherInput.closest("label")?.classList.add("is-invalid");
+    isValid = false;
+  }
+
   const timeChecked = form.elements.time?.value;
   if (currentStep === 2 && !timeChecked) isValid = false;
 
@@ -94,6 +104,7 @@ function validateCurrentStep() {
 
 function getPayload() {
   const data = new FormData(form);
+  const brandValue = data.get("brands") === "其他" ? data.get("brandOther")?.trim() : data.get("brands")?.trim();
   return {
     id: `SKMM-${Date.now()}`,
     submittedAt: new Date().toISOString(),
@@ -103,12 +114,23 @@ function getPayload() {
     email: data.get("email")?.trim(),
     referrer: data.get("referrer")?.trim() || "無",
     style: data.get("style")?.trim(),
-    brands: data.get("brands")?.trim(),
+    brands: brandValue,
     date: data.get("date"),
     time: data.get("time"),
     colorConsult: data.get("colorConsult"),
     notes: data.get("notes")?.trim() || "無",
   };
+}
+
+function updateBrandOtherField() {
+  const showOther = brandSelect.value === "其他";
+  brandOtherField.hidden = !showOther;
+  brandOtherInput.required = showOther;
+  if (!showOther) {
+    brandOtherInput.value = "";
+    brandOtherInput.classList.remove("is-invalid");
+    brandOtherInput.closest("label")?.classList.remove("is-invalid");
+  }
 }
 
 function renderReview() {
@@ -241,6 +263,7 @@ form.addEventListener("input", (event) => {
 form.addEventListener("change", (event) => {
   event.target.classList.remove("is-invalid");
   event.target.closest("label")?.classList.remove("is-invalid");
+  if (event.target === brandSelect) updateBrandOtherField();
 });
 
 form.addEventListener("submit", async (event) => {

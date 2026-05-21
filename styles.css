@@ -353,6 +353,10 @@ label span,
   grid-column: 1 / -1;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 input,
 select,
 textarea {
@@ -385,6 +389,8 @@ input[type="date"]::-webkit-date-and-time-value {
 input[type="date"]::-webkit-calendar-picker-indicator {
   margin-left: 4px;
   flex: 0 0 auto;
+  filter: invert(1) brightness(1.35);
+  opacity: 0.86;
 }
 
 select {

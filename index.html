@@ -83,7 +83,19 @@
               </label>
               <label>
                 <span>喜歡的品牌 *</span>
-                <input name="brands" required placeholder="例如：Issey Miyake, Homme Plisse, Kolor" />
+                <select name="brands" id="brandSelect" required>
+                  <option value="">請選擇品牌</option>
+                  <option value="Y's for man">Y's for man</option>
+                  <option value="DAIWAPIER 39">DAIWAPIER 39</option>
+                  <option value="NAMESAKE">NAMESAKE</option>
+                  <option value="peter wu">peter wu</option>
+                  <option value="GOOPi">GOOPi</option>
+                  <option value="其他">其他</option>
+                </select>
+              </label>
+              <label class="brand-other-field" id="brandOtherField">
+                <span>其他品牌 *</span>
+                <input name="brandOther" id="brandOtherInput" placeholder="請輸入品牌名稱" />
               </label>
               <label>
                 <span>希望預約日期 *</span>
