@@ -365,10 +365,26 @@ textarea {
   color: #fff;
   padding: 13px 15px;
   outline: none;
+  max-width: 100%;
   transition:
     border-color 0.2s ease,
     background 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type="date"]::-webkit-date-and-time-value {
+  min-width: 0;
+  text-align: left;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  margin-left: 4px;
+  flex: 0 0 auto;
 }
 
 select {
@@ -836,8 +852,35 @@ body[data-step="1"] .form-actions {
   input,
   select,
   textarea {
-    min-height: 52px;
-    padding: 13px 14px;
+    min-height: 48px;
+    padding: 11px 12px;
+    font-size: 16px;
+  }
+
+  input[type="date"] {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding-right: 8px;
+  }
+
+  input[type="date"]::-webkit-date-and-time-value {
+    max-width: calc(100% - 28px);
+    overflow: hidden;
+  }
+
+  label,
+  .radio-group {
+    gap: 7px;
+  }
+
+  .field-grid {
+    gap: 14px;
+  }
+
+  body[data-step="3"] .form-step {
+    padding-top: 14px;
+    padding-bottom: 14px;
   }
 
   .field-grid,
