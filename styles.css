@@ -100,12 +100,14 @@ textarea {
 }
 
 .brand-mark {
-  color: #fff;
-  font-size: clamp(2rem, 3.9vw, 3.25rem);
-  font-weight: 800;
-  letter-spacing: 0;
-  line-height: 0.9;
-  white-space: nowrap;
+  width: clamp(178px, 23vw, 330px);
+  line-height: 0;
+}
+
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .eyebrow {
@@ -763,10 +765,6 @@ body[data-step="1"] .form-actions {
     padding: 24px 22px 12px;
   }
 
-  .brand-mark {
-    white-space: normal;
-  }
-
   .stepper {
     padding: 0 22px;
   }
@@ -817,7 +815,7 @@ body[data-step="1"] .form-actions {
   }
 
   .brand-mark {
-    font-size: clamp(1.9rem, 8.4vw, 2.55rem);
+    width: min(72vw, 250px);
   }
 
   .intro-copy {
